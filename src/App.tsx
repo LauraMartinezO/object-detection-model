@@ -1,34 +1,56 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import Button from '@mui/material/Button';
+import play from '../src/assets/icons/play.png';
+import upload from '../src/assets/icons/upload.png';
+import { ChangeEvent } from 'react';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const uploadFile = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files ? e.target.files[0] : null;
+    console.log("Archivo: ", file?.name);
+  }
+
+  async function openCamera(e){
+    e.preventDefault();
+    try{
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true});
+      console.log("Stream prendida: ", stream);
+    } catch (error) {
+      console.error("Error al acceder a la cámara: ", error);
+    }
+  }
+
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="container">
+      <div className="container__header">
+        <h2 className="container__title">
+          Object Detection Input
+        </h2>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+      <div className="buttonContainer">
+        <input  type='file' name='image' accept='image/png, image/jpeg' onChange={uploadFile}/>
+        <Button variant="contained"
+        sx={{
+          backgroundColor: "#424B5A",
+          "&:hover": { backgroundColor: "#424B5A" },
+        }}
+        endIcon={
+          <img className="buttonContainer__icon" src={upload} alt="Upload icon" />
+        }
+        >
+          Upload file
+        </Button>
+        <Button variant="outlined"
+        onClick={openCamera}
+        endIcon={
+          <img className="buttonContainer__icon" src={play} alt="Play icon" />
+        }
+        >
+          Open camera
+        </Button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 
