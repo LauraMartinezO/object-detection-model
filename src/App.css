@@ -4,16 +4,12 @@
   margin: 0 auto;
   padding: 0.7rem;
   text-align: center;
-  background-color: whitesmoke;
+  background-color: aliceblue;
   position: fixed;
 }
 
 .card {
   padding: 2em;
-}
-
-.container {
-  margin: 2em;
 }
 
 .container__title {
@@ -23,9 +19,3 @@
   font-weight: 500;
   margin-block: 8px
 }
-
-.buttonContainer__icon {
-  width: 24.98px;
-  height: 27px;
-}
-
