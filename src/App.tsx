@@ -1,7 +1,7 @@
 import "./App.css";
 
 import { Button, Grid, Box, CardMedia } from "@mui/material";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, ChangeEvent } from "react";
 import { FileUploadOutlined, PlayCircleOutlineRounded } from "@mui/icons-material";
 import { drawRect } from "./utilities/drawBox";
 import * as cocossd from "@tensorflow-models/coco-ssd";
@@ -12,11 +12,11 @@ import Webcam from "react-webcam";
 function App() {
   const [uploadedFile, setUploadedFile] = useState("");
   const [showWebcam, setShowWebcam] = useState(false);
-  const webcamRef = useRef(null);
-  const canvasRef = useRef(null);
+  const webcamRef = useRef<Webcam>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const uploadFile = (event) => {
-    const file = event.target.files[0];
+  const uploadFile = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       setUploadedFile(imageUrl);
@@ -28,21 +28,20 @@ function App() {
     setShowWebcam(!showWebcam);
   }
 
-    // Main function
-    const runCoco = async () => {
-      const net = await cocossd.load();
-      console.log("Handpose model loaded.");
-      //  Loop and detect hands
-      setInterval(() => {
-        detect(net);
-      }, 10);
-    };
+  // Main function
+  const runCoco = async () => {
+    const net = await cocossd.load();
+    console.log("Handpose model loaded.");
+    //  Loop and detect hands
+    setInterval(() => {
+      detect(net);
+    }, 10);
+  };
   
 const detect = async (net) => {
   // Check data is available
   if (
-    typeof webcamRef.current !== "undefined" &&
-    webcamRef.current !== null &&
+    webcamRef.current?.video?.readyState !== undefined &&
     webcamRef.current.video.readyState === 4
   ) {
     // Get Video Properties
@@ -55,19 +54,25 @@ const detect = async (net) => {
     webcamRef.current.video.height = videoHeight;
 
     // Set canvas height and width
-    canvasRef.current.width = videoWidth;
-    canvasRef.current.height = videoHeight;
+    if (canvasRef.current !== null && canvasRef.current !== undefined) {
+      canvasRef.current.width = videoWidth;
+      canvasRef.current.height = videoHeight;
 
-    // Make Detections
-    const obj = await net.detect(video);
+      // Make Detections
+      const obj = await net.detect(video);
 
-    // Draw mesh
-    const ctx = canvasRef.current.getContext("2d");
-    drawRect(obj, ctx); 
+      // Draw mesh
+      const ctx = canvasRef.current.getContext("2d");
+      drawRect(obj, ctx); 
+    } else {
+      console.error("canvasRef is null or undefined");
+    }
   }
 };
   
-    useEffect(()=>{runCoco()},[]);
+  useEffect(()=>{
+    runCoco();
+  },[runCoco]);
 
   return (
     <Box sx={{ flexGrow: 1, margin: 4.2 }}>
