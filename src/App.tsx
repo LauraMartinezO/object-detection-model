@@ -4,6 +4,7 @@ import { Button, Grid, Box, CardMedia } from "@mui/material";
 import { useState, useRef, useEffect, ChangeEvent } from "react";
 import { FileUploadOutlined, PlayCircleOutlineRounded } from "@mui/icons-material";
 import { drawRect } from "./utilities/drawBox";
+import "@tensorflow/tfjs-backend-webgl";
 import * as cocossd from "@tensorflow-models/coco-ssd";
 import CardComponent from "./components/CardComponent";
 import Webcam from "react-webcam";
@@ -147,6 +148,19 @@ const detect = async (net) => {
               )
             )}
           </CardComponent>
+          <canvas
+          ref={canvasRef}
+          style={{
+            position: "absolute",
+            marginLeft: "auto",
+            marginRight: "auto",
+            left: 0,
+            right: 0,
+            textAlign: "center",
+            width: 640,
+            height: 480,
+          }}
+        />
         </Grid>
       </Grid>
     </Box>
