@@ -1,3 +1,9 @@
+interface drawRectProps {
+  detections: string;
+  ctx: number;
+  prediction: React.ReactNode;
+}
+
 export const drawRect = (detections, ctx) =>{
     // Loop through each prediction
     detections.forEach(prediction => {
