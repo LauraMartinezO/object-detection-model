@@ -4,13 +4,13 @@ import PropTypes from "prop-types";
 
 interface CardComponentProps {
   title: string;
-  height: number;
+  height: string;
   children: React.ReactNode;
 }
 
 const CardComponent = ({ title, height, children }: CardComponentProps) => {
   return (
-    <Card sx={{ width: 1400, height: height }}>
+    <Card sx={{ width: "100%", height: height }}>
       <h2 className="container__title">{title}</h2>
       <Divider />
       <div>{children}</div>

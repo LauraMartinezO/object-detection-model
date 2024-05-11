@@ -62,7 +62,6 @@ function App() {
         canvasRef.current.height = videoHeight;
 
         // Make Detections
-        // Make Detections
         const obj = await net.detect(video);
         console.log(obj)
 
@@ -80,10 +79,10 @@ function App() {
   });
 
   return (
-    <Box sx={{ flexGrow: 1, margin: 4.2 }}>
+    <Box sx={{ flexGrow: 1, margin: 3 }}>
       <Grid container columns={1} rowGap={5}>
         <Grid item xs={8}>
-          <CardComponent height={155} title="Object Detection Input">
+          <CardComponent height={"20vh"} title="Object Detection Input">
             <Grid
               container
               justifyContent="center"
@@ -125,7 +124,7 @@ function App() {
         </Grid>
 
         <Grid item xs={4}>
-          <CardComponent height={530} title="Results">
+          <CardComponent height={"70vh"} title="Results">
             <div style={{ position: "relative" }}>
               {showWebcam ? (
                 <Webcam
