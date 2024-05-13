@@ -21,7 +21,7 @@ function App() {
     const file = event.target.files?.[0];
     if (file) {
       const imageUrl = URL.createObjectURL(file);
-      setUploadedFile(imageUrl);
+      detectObjectsFromImage(imageUrl);
     }
     console.log("Archivo: ", file?.name);
   };
@@ -73,6 +73,31 @@ function App() {
       }
     }
   };
+
+  const detectObjectsFromImage = async (imageUrl) => {
+    tf.setBackend("webgl");
+    const net = await cocossd.load();
+    console.log("Handpose model loaded.");
+
+    const img = new Image();
+    img.src = imageUrl;
+    img.onload = async () => {
+      const obj = await net.detect(img);
+      console.log(obj);
+
+      const canvas = document.createElement("canvas");
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext("2d");
+
+      if (ctx !== null && ctx != undefined) {
+        ctx.drawImage(img, 0, 0);
+        drawRect(obj, ctx);
+        setUploadedFile(canvas.toDataURL());
+      }
+    };
+  };
+
 
   useEffect(() => {
     runCoco();
