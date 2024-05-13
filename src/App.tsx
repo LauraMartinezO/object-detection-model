@@ -67,7 +67,9 @@ function App() {
 
         // Draw mesh
         const ctx = canvasRef.current.getContext("2d");
-        drawRect(obj, ctx);
+        if (ctx != null && ctx != undefined){
+          drawRect(obj, ctx);
+        }
       } else {
         console.error("canvasRef is null or undefined");
       }
@@ -152,16 +154,32 @@ function App() {
           <CardComponent height={"70vh"} title="Results">
             <div style={{ position: "relative" }}>
               {showWebcam ? (
+                <div style={{ 
+                  width: "100%", 
+                  height: "430px", 
+                  margin: "1.5rem", 
+                  objectFit: "contain" 
+                  }}
+                >
                 <Webcam
                   ref={webcamRef}
                   muted={true}
-                  style={{
-                    width: "100%",
-                    height: "430px",
-                    margin: "1.5rem",
-                    objectFit: "contain",
+                  style={{ 
+                    width: "100%", 
+                    height: "100%" 
                   }}
                 />
+                <canvas
+                  ref={canvasRef}
+                  style={{ 
+                    position: "absolute", 
+                    top: 0, left: 25, 
+                    width: "100%", 
+                    height: "100%", 
+                    objectFit: "contain"
+                  }}
+                />
+              </div>
               ) : (
                 uploadedFile && (
                   <CardMedia
@@ -176,20 +194,6 @@ function App() {
                   />
                 )
               )}
-              <canvas
-                ref={canvasRef}
-                style={{
-                  position: "absolute",
-                  marginLeft: "auto",
-                  marginRight: "auto",
-                  top: "40%",
-                  left: "50%",
-                  transform: "translate(-45%, -45%)",
-                  zIndex: 8,
-                  width: 640,
-                  height: 470,
-                }}
-              />
             </div>
           </CardComponent>
         </Grid>
