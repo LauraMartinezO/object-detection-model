@@ -41,7 +41,7 @@ function App() {
     }, 10);
   };
 
-  const detect = async (net) => {
+  const detect = async (net:any) => {
     // Check data is available
     if (
       webcamRef.current?.video?.readyState !== undefined &&
@@ -76,7 +76,7 @@ function App() {
     }
   };
 
-  const detectObjectsFromImage = async (imageUrl) => {
+  const detectObjectsFromImage = async (imageUrl:any) => {
     tf.setBackend("webgl");
     const net = await cocossd.load();
     console.log("Handpose model loaded.");
