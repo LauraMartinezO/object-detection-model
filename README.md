@@ -1,3 +1,8 @@
+## Despliegue
+https://object-detection-model-iota.vercel.app
+
+
+## Presentación
 ![image](https://github.com/LauraMartinezO/object-detection-model/assets/72984829/dcc7f1ad-6bcc-453a-9d17-570d5fe90147)
 ![image](https://github.com/LauraMartinezO/object-detection-model/assets/72984829/c1cf089d-1cba-4915-83a7-91a6b8c70344)
 ![image](https://github.com/LauraMartinezO/object-detection-model/assets/72984829/5d766879-8e31-4c3f-93ec-64119d719fab)
