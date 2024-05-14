@@ -8,6 +8,6 @@
 ![image](https://github.com/LauraMartinezO/object-detection-model/assets/72984829/34f82b1f-b542-4d35-ade1-088754ef602e)
 ![image](https://github.com/LauraMartinezO/object-detection-model/assets/72984829/1ad934ff-5f17-4e92-b32b-f000de03135a)
 ![image](https://github.com/LauraMartinezO/object-detection-model/assets/72984829/c0f2ab03-7e79-49c1-9b42-b18068ab8783)
-![image](https://github.com/LauraMartinezO/object-detection-model/assets/72984829/dd6df3e8-d356-438c-ba1b-1d66fbec32d5)
+![image](https://github.com/LauraMartinezO/object-detection-model/assets/72984865/bea99e4c-a6e0-4155-9e80-cc19e067cc50)
 ![image](https://github.com/LauraMartinezO/object-detection-model/assets/72984829/ef11eaaf-2e45-43fb-a206-02f8f25527e4)
 
